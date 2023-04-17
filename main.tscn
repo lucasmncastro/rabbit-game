@@ -1,0 +1,231 @@
+[gd_scene load_steps=23 format=3 uid="uid://cjx10gwouny3x"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_snbnj"]
+[ext_resource type="PackedScene" uid="uid://damphnpfscsau" path="res://cactus_1.tscn" id="2_fpssj"]
+[ext_resource type="Script" path="res://character.gd" id="2_mj4ow"]
+[ext_resource type="PackedScene" uid="uid://7lvte5omp0qg" path="res://cactus_2.tscn" id="3_jmoh6"]
+[ext_resource type="PackedScene" uid="uid://d0pm1hmhsfhhu" path="res://sand.tscn" id="3_ovkp0"]
+[ext_resource type="PackedScene" uid="uid://b20ogupnj5qh" path="res://cactus_3.tscn" id="4_saq2h"]
+[ext_resource type="Texture2D" uid="uid://dp7jim5qjdys5" path="res://arts/rabbit-running_1.png" id="5_cloxs"]
+[ext_resource type="PackedScene" uid="uid://dpkobeyl80ksn" path="res://bird.tscn" id="5_ucfvl"]
+[ext_resource type="Texture2D" uid="uid://cjavvlsivnd6" path="res://arts/rabbit-running_2.png" id="6_dwbak"]
+[ext_resource type="Texture2D" uid="uid://6r28pmhdx3e0" path="res://arts/rabbit-down_1.png" id="9_k0u2b"]
+[ext_resource type="Texture2D" uid="uid://btyl20w1oys6b" path="res://arts/rabbit-down_2.png" id="10_w2m2j"]
+[ext_resource type="AudioStream" uid="uid://crr4hmog0kht8" path="res://sounds/mixkit-player-jumping-in-a-video-game-2043.wav" id="12_yyi64"]
+[ext_resource type="AudioStream" uid="uid://b5c2sy7h7spcr" path="res://sounds/mixkit-bonus-earned-in-video-game-2058.wav" id="13_ndblo"]
+[ext_resource type="AudioStream" uid="uid://cudg3ghx7eehb" path="res://sounds/mixkit-boxer-punch-exhaling-2054.wav" id="14_1v8jc"]
+
+[sub_resource type="SystemFont" id="SystemFont_cd7fp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oh1sx"]
+font = SubResource("SystemFont_cd7fp")
+font_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_elyk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa2s7"]
+size = Vector2(641.001, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7trk"]
+size = Vector2(22.3281, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8v5ey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cloxs")
+}],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cloxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dwbak")
+}],
+"loop": true,
+"name": &"running",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k0u2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w2m2j")
+}],
+"loop": true,
+"name": &"running_down",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bq43c"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vk3ai"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_snbnj")
+cactus_1_scene = ExtResource("2_fpssj")
+cactus_2_scene = ExtResource("3_jmoh6")
+cactus_3_scene = ExtResource("4_saq2h")
+bird_scene = ExtResource("5_ucfvl")
+sand_scene = ExtResource("3_ovkp0")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 560.0
+offset_top = 23.0
+offset_right = 615.0
+offset_bottom = 49.0
+text = "000000"
+label_settings = SubResource("LabelSettings_oh1sx")
+horizontal_alignment = 2
+
+[node name="HiScore" type="Label" parent="."]
+offset_left = 488.0
+offset_top = 23.0
+offset_right = 543.0
+offset_bottom = 49.0
+text = "000000"
+label_settings = SubResource("LabelSettings_oh1sx")
+horizontal_alignment = 2
+
+[node name="HiScoreLabel" type="Label" parent="."]
+offset_left = 429.0
+offset_top = 23.0
+offset_right = 484.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+text = "HI"
+label_settings = SubResource("LabelSettings_oh1sx")
+horizontal_alignment = 2
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(8.99921, 261)
+physics_material_override = SubResource("PhysicsMaterial_elyk8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(310.5, 0)
+shape = SubResource("RectangleShape2D_xa2s7")
+
+[node name="Line2D" type="Line2D" parent="Floor"]
+position = Vector2(0.000789642, 8)
+points = PackedVector2Array(-8.99921, -29, 630, -29)
+width = 1.0
+default_color = Color(0.133333, 0.12549, 0.203922, 1)
+
+[node name="Character" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(65, 221)
+floor_stop_on_slope = false
+script = ExtResource("2_mj4ow")
+alive = false
+
+[node name="CollisionCharacter" type="CollisionShape2D" parent="Character"]
+position = Vector2(1, 8)
+shape = SubResource("RectangleShape2D_q7trk")
+
+[node name="JumpAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Character"]
+position = Vector2(-65, -221)
+stream = ExtResource("12_yyi64")
+
+[node name="Area2D" type="Area2D" parent="Character"]
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 0.0
+
+[node name="CollisionUp" type="CollisionPolygon2D" parent="Character/Area2D"]
+polygon = PackedVector2Array(-3, -7, -16, 2, -17, 13, -10, 21, 6, 22, 11, 19, 14, 11, 14, 2, 18, -5, 17, -13, 12, -17, 10, -28, 5, -26, 5, -17, -3, -31, -6, -26, -1, -15)
+
+[node name="CollisionDown" type="CollisionPolygon2D" parent="Character/Area2D"]
+polygon = PackedVector2Array(-13, -4, -18, 2, -18, 13, -10, 22, 6, 22, 11, 19, 21, 15, 25, 10, 25, -2, 17, -6, 7, -9, 3, -8, 1, -4, -8, -5, -9, -11, -14, -11, -17, -9)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Character"]
+sprite_frames = SubResource("SpriteFrames_8v5ey")
+animation = &"running"
+
+[node name="CactusPosition" type="Marker2D" parent="."]
+position = Vector2(639, 251)
+
+[node name="BirdPosition" type="Marker2D" parent="."]
+position = Vector2(640, 193)
+
+[node name="BirdPosition2" type="Marker2D" parent="."]
+position = Vector2(640, 225)
+
+[node name="BirdPosition3" type="Marker2D" parent="."]
+position = Vector2(640, 153)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+
+[node name="SandTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="BlinkScoreTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -19.5
+offset_right = 75.0
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_bq43c")
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = 17.5
+offset_right = 136.0
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Press space key to start."
+label_settings = SubResource("LabelSettings_vk3ai")
+horizontal_alignment = 1
+
+[node name="BlinkTimer" type="Timer" parent="GameOver"]
+wait_time = 0.25
+autostart = true
+
+[node name="ScoreAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ndblo")
+
+[node name="HitAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_1v8jc")
+
+[connection signal="hit" from="Character" to="." method="_on_character_hit"]
+[connection signal="area_entered" from="Character/Area2D" to="Character" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="SandTimer" to="." method="_on_sand_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
+[connection signal="timeout" from="BlinkScoreTimer" to="." method="_on_blink_score_timer_timeout"]
+[connection signal="timeout" from="GameOver/BlinkTimer" to="." method="_on_blink_timer_timeout"]
