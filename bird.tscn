@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpkobeyl80ksn"]
+
+[ext_resource type="Script" path="res://passing.gd" id="1_k26u4"]
+[ext_resource type="Texture2D" uid="uid://g4wosnso8alu" path="res://arts/bird_1.png" id="2_cwwde"]
+[ext_resource type="Texture2D" uid="uid://cgqol667nysqx" path="res://arts/bird_2.png" id="3_6hslj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lywho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cwwde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6hslj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Bird" type="Area2D" groups=["things"]]
+script = ExtResource("1_k26u4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-10, -0.5)
+polygon = PackedVector2Array(-16, 4.5, -12, -4.5, -10, -1.5, -6, -3.5, 2, -3.5, 5, -1.5, 0, 0.5, 0, 4.5, -4, 6.5, -6, 6.5, -6, 3.5, -3, 2.5, -12, 2.5, -16, 5.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lywho")
+frame_progress = 0.549649

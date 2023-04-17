@@ -1,0 +1,27 @@
+TODO:
+	
+x Criar obstáculo
+x Instanciar obstáculos
+x Instanciar obstáculos aleatoriamente
+x Instanciar obstáculos diferentes
+x Contador de tempo
+x Começar parado e não caindo
+x Aumentar a velocidade a cada X pontos
+x Tela do game over
+x Ação para recomeçar
+x Piscar score cada 100 pontos
+x Exibir HI
+x Areia
+- Sprite das nuvens
+x Começar com o primeiro toque
+x Desenho do coelho
+x Desenho do coelho abaixado
+x Criar cactus simples
+x Criar cactus duplo
+x Criar cactus triplo
+x Areia aleatória no chão
+x Animação do gavião
+x Animação do coelho correndo
+x Desenho/Animação do coelho saltando
+
+https://mixkit.co/free-sound-effects/game/

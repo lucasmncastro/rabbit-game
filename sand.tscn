@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0pm1hmhsfhhu"]
+
+[ext_resource type="Texture2D" uid="uid://d2sghnnwxrbdn" path="res://arts/sand_1.png" id="1_gmq5e"]
+[ext_resource type="Texture2D" uid="uid://ko75iexrfhgb" path="res://arts/sand_2.png" id="2_arthr"]
+[ext_resource type="Texture2D" uid="uid://63xlvm68t5e5" path="res://arts/sand_3.png" id="3_xqdnb"]
+[ext_resource type="Script" path="res://sand.gd" id="4_jlumg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2a1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gmq5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_arthr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xqdnb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sand" type="AnimatedSprite2D" groups=["things"]]
+sprite_frames = SubResource("SpriteFrames_v2a1u")
+script = ExtResource("4_jlumg")
